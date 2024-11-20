@@ -72,7 +72,7 @@ export function App() {
           direction="horizontal"
           className="w-full justify-center items-center p-4 gap-4"
         >
-          <img src="/images/zig.png" width={50} />
+          <img src="/machengine.org/images/zig.png" width={50} />
           <Text weight="bold" size="2xl">
             Built with love, hard-work & Zig
           </Text>

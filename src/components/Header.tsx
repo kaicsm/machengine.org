@@ -17,7 +17,10 @@ export default function Header() {
         className="container mx-auto border-none md:border-dashed px-4 md:px-8 p-4 flex justify-between items-center"
       >
         {/* Using invert for light mode is temporary */}
-        <img src="/images/mach.svg" className="invert dark:invert-0" />
+        <img
+          src="/machengine.org/images/mach.svg"
+          className="invert dark:invert-0"
+        />
 
         <nav>
           <ul className="flex space-x-6">
