@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --header-height: 60px;
+}
+
+@font-face {
+    font-family: "Orbitron";
+    src: url("/src/assets/fonts/Orbitron.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@layer base {
+    body {
+        font-family: "Orbitron";
+    }
+}
