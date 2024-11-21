@@ -8,10 +8,12 @@ export function App() {
     <Layout>
       {/* Notifications */}
       <View
-        onClick={() =>
-          (window.location.href =
-            "https://devlog.hexops.com/2024/mach-v0.3-released/")
-        }
+        onClick={() => {
+          window.open(
+            "https://devlog.hexops.com/2024/mach-v0.3-released/",
+            "_blank"
+          );
+        }}
         className="border-b border-dashed border-gray-300 dark:border-gray-600 justify-center items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer"
       >
         <Text size="sm">What's new in v0.3? →</Text>
@@ -47,7 +49,14 @@ export function App() {
               modular games, visualizations, and desktop/mobile GUI apps.
             </Text>
 
-            <Button>Get started</Button>
+            <Button
+              animated
+              onClick={() =>
+                window.open("https://github.com/hexops/mach", "_blank")
+              }
+            >
+              Get started
+            </Button>
           </View>
 
           {/* Video */}
@@ -66,16 +75,35 @@ export function App() {
         </View>
 
         {/* Zig expose */}
-        <View
-          borderY
-          shadow
-          direction="horizontal"
-          className="w-full justify-center items-center p-4 gap-4"
-        >
-          <img src="/machengine.org/images/zig.png" width={50} />
-          <Text weight="bold" size="2xl">
-            Built with love, hard-work & Zig
-          </Text>
+        <View bgColor="bg-trasnsparent" className="w-full gap-8">
+          {/* Card */}
+          <View
+            borderY
+            shadow
+            direction="horizontal"
+            className="w-full justify-center items-center p-4 gap-4"
+          >
+            <img src="/machengine.org/images/zig.png" width={50} />
+            <Text weight="bold" size="2xl">
+              Built with love, hard-work & Zig
+            </Text>
+          </View>
+
+          {/* Text */}
+          {/*<View
+            bgColor="bg-trasnsparent"
+            className="w-full justify-center items-center p-4"
+          >
+            <View bgColor="bg-trasnsparent" className="w-1/2">
+              <Text>
+                Zig is a general-purpose simple programming language featuring
+                compile-time code execution, blazing-fast compilation speeds,
+                and bare-metal performance.
+              </Text>
+            </View>
+            
+          </View>
+          */}
         </View>
       </View>
     </Layout>

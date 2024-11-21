@@ -3,14 +3,16 @@ import { Text } from "./Text";
 import Button from "./Button";
 
 import { FaGithub, FaDiscord } from "react-icons/fa";
-import { RiMenuFill } from "react-icons/ri";
+import { RiCloseLine, RiMenuFill } from "react-icons/ri";
 import { useEffect, useRef, useState } from "preact/hooks";
 import gsap from "gsap";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const menuRef = useRef<HTMLElement | null>(null);
+  const menuIconRef = useRef<HTMLDivElement | null>(null);
+  const menuOpenIconRef = useRef<HTMLDivElement | null>(null);
+  const menuCloseIconRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!menuRef.current) return;
@@ -23,6 +25,20 @@ export default function Header() {
         ease: "power2.out",
         display: "block",
       });
+
+      if (menuOpenIconRef.current && menuCloseIconRef.current) {
+        gsap.to(menuOpenIconRef.current, {
+          opacity: 0,
+          duration: 0.1,
+          ease: "power2.out",
+        });
+        gsap.to(menuCloseIconRef.current, {
+          opacity: 1,
+          rotation: 90,
+          duration: 0.2,
+          ease: "power2.out",
+        });
+      }
     } else {
       gsap.to(menuRef.current, {
         opacity: 0,
@@ -35,6 +51,20 @@ export default function Header() {
           }
         },
       });
+
+      if (menuOpenIconRef.current && menuCloseIconRef.current) {
+        gsap.to(menuOpenIconRef.current, {
+          opacity: 1,
+          duration: 0.2,
+          ease: "power2.in",
+        });
+        gsap.to(menuCloseIconRef.current, {
+          opacity: 0,
+          rotation: 0,
+          duration: 0.1,
+          ease: "power2.in",
+        });
+      }
     }
   }, [isMenuOpen]);
 
@@ -62,8 +92,22 @@ export default function Header() {
               className="md:hidden text-gray-600 hover:text-gray-200"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <View border className="p-1">
-                <RiMenuFill size={24} />
+              <View border className="p-1 rounded-md relative">
+                <div ref={menuIconRef} className="relative w-6 h-6">
+                  <div
+                    ref={menuOpenIconRef}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <RiMenuFill size={24} />
+                  </div>
+                  <div
+                    ref={menuCloseIconRef}
+                    className="absolute inset-0 flex items-center justify-center"
+                    style={{ opacity: 0 }}
+                  >
+                    <RiCloseLine size={24} />
+                  </div>
+                </div>
               </View>
             </Button>
 
@@ -73,7 +117,7 @@ export default function Header() {
                 <li>
                   <Text
                     as="a"
-                    href="/docs"
+                    href="/machengine.org/docs"
                     color="text-gray-600"
                     className="hover:text-gray-200 transition-colors cursor-pointer"
                   >
@@ -83,7 +127,7 @@ export default function Header() {
                 <li>
                   <Text
                     as="a"
-                    href="/project"
+                    href="/machengine.org/project"
                     color="text-gray-600"
                     className="hover:text-gray-200 transition-colors cursor-pointer"
                   >
@@ -93,7 +137,7 @@ export default function Header() {
                 <li>
                   <Text
                     as="a"
-                    href="/devlog"
+                    href="/machengine.org/devlog"
                     color="text-gray-600"
                     className="hover:text-gray-200 transition-colors cursor-pointer"
                   >
@@ -127,7 +171,7 @@ export default function Header() {
           {/* Mobile navigation */}
           <nav
             ref={menuRef}
-            className="md:hidden absolute w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700"
+            className="md:hidden absolute w-full bg-white dark:bg-gray-900 border-b border-x border-gray-200 dark:border-gray-700"
             style={{ display: "none", opacity: 0 }}
           >
             <ul className="flex flex-col space-y-4 py-4">
