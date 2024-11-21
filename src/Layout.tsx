@@ -21,7 +21,7 @@ export function Layout({ children }: LayoutProps) {
         borderX
         as="main"
         direction="vertical"
-        className="flex-grow border-none md:border-dashed container mx-auto min-h-screen relative"
+        className="flex-grow border-none sm:border-dashed container mx-auto min-h-screen relative"
       >
         {/* Checkerboard background */}
         <View className="absolute inset-0">
