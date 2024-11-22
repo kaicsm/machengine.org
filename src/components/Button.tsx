@@ -1,23 +1,16 @@
-import gsap from "gsap";
-import { useRef, useState } from "preact/hooks";
 import { JSX } from "preact/jsx-runtime";
 
 interface ButtonProps
   extends Omit<JSX.HTMLAttributes<HTMLButtonElement>, "size"> {
   size?: "sm" | "md" | "lg";
   variant?: "primary" | "secondary" | "outline";
-  animated?: boolean;
 }
 
 export default function Button({
-  animated = false,
   variant = "primary",
   size = "md",
   ...props
 }: ButtonProps) {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-
   const getVariantClasses = () => {
     switch (variant) {
       case "primary":
@@ -44,56 +37,10 @@ export default function Button({
     }
   };
 
-  const handleMouseEnter = () => {
-    if (animated) {
-      const text = buttonRef.current?.querySelector(".button-content");
-      const arrow = buttonRef.current?.querySelector(".button-arrow");
-
-      setIsHovered(true);
-
-      gsap.to(text!!, {
-        x: 10,
-        duration: 0.2,
-        ease: "power1.out",
-      });
-
-      gsap.to(arrow!!, {
-        opacity: 1,
-        duration: 0.2,
-        ease: "power1.out",
-      });
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (animated) {
-      const text = buttonRef.current?.querySelector(".button-content");
-      const arrow = buttonRef.current?.querySelector(".button-arrow");
-
-      setIsHovered(false);
-
-      gsap.to(text!!, {
-        x: 0,
-        duration: 0.2,
-        ease: "power1.out",
-      });
-
-      gsap.to(arrow!!, {
-        opacity: 0,
-        duration: 0.2,
-        ease: "power1.out",
-      });
-    }
-  };
-
   return (
     <button
-      ref={buttonRef}
-      onMouseEnter={animated ? handleMouseEnter : undefined}
-      onMouseLeave={animated ? handleMouseLeave : undefined}
       {...props}
       class={`
-        relative 
         rounded-md 
         transition-all 
         duration-200 
@@ -107,27 +54,7 @@ export default function Button({
         ${props.class || ""}
       `}
     >
-      <span
-        class={`button-content relative inline-block ${
-          animated ? "can-animate" : ""
-        }`}
-      >
-        <span class="button-text">{props.children}</span>
-        {animated && (
-          <span
-            class="button-arrow ml-1 absolute opacity-0"
-            style={{
-              fontSize: isHovered ? "1.2em" : "1em",
-              right: "-1.5em",
-              top: "50%",
-              transform: "translateY(-50%)",
-              transition: "font-size 0.2s ease",
-            }}
-          >
-            →
-          </span>
-        )}
-      </span>
+      {props.children}
     </button>
   );
 }

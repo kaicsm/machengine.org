@@ -11,7 +11,7 @@ export function App() {
         onClick={() => {
           window.open(
             "https://devlog.hexops.com/2024/mach-v0.3-released/",
-            "_blank"
+            "_blank",
           );
         }}
         className="border-b border-dashed border-gray-300 dark:border-gray-600 justify-center items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer"
@@ -50,7 +50,6 @@ export function App() {
             </Text>
 
             <Button
-              animated
               onClick={() =>
                 window.open("https://github.com/hexops/mach", "_blank")
               }
